@@ -7,6 +7,7 @@ python3 install -r requirements.txt
 cd spr/src
 PYTHONPATH=. run python3 scripts/preprocess_ml1m.py --data=PATH_TO_ML1M
 PYTHONPATH=. run python3  scripts/test_your_function.py --data=PATH_TO_ML1M --db_path=../results/
+PYTHONPATH=. run python3  scripts/test_your_function.py --data=PATH_TO_OTHER_DADASET --db_path=../results/ --N_users=5000
 PYTHONPATH=. run python3  scripts/get_report.py --db_path=../results/
 ```
 
@@ -110,7 +111,7 @@ yule: alpha: 12, factors: 34
 
 ## Объединение рекомендательных списков
 
-1. Объединение
+# Объединение
 
 | | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
@@ -129,7 +130,7 @@ yule: alpha: 12, factors: 34
 | ALSRecommender: canberra, hamming, sokalmichener, sokalsneath |   0.26 |   0.34 |   0.26 |   **0.36** | 
 Лучший результат с одной метрикой |  **0.30**  |  **0.35**  |  **0.29**  |  **0.36**  |
 
-2. Усреднение 
+# Усреднение 
 
 | | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
@@ -159,7 +160,7 @@ yule: alpha: 12, factors: 34
 |---| ---| ---| ---| --- |
 | ALSRecommenderKMeans: braycurtis, correlation, canberra, hamming, sokalmichener, sokalsneath  |   0.24  |   0.29 |   0.24 |   0.29 | 
 
-## Сравнение метрик близости для кластеризации
+# Сравнение метрик близости
 
 | | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
@@ -229,7 +230,7 @@ sqeuclidean: alpha: 14, factors: 49
 
 yule: alpha: 22, factors: 57
 
-## Объединение рекомендательных списков
+# Объединение рекомендательных списков
 
 Лучшие функции близости по всем метрикам
 
@@ -238,7 +239,34 @@ yule: alpha: 22, factors: 57
 | ALSRecommenderKMeans: cosine, correlation, euclidean, cityblock  |   0.32  |   0.38 |   **0.32** |   0.39 | 
 Лучший результат с одной метрикой |  **0.33**   |  **0.39**  |  **0.32**  |  **0.40**  | 
 
-## Подбор количества кластеров
+# Подбор количества кластеров
+
+![alt text](https://psv4.userapi.com/c235131/u169642165/docs/d10/be589b4e23a6/KMeans_all_metric_1.png?extra=zABM6evPmazoQlkXocSa6QVWK9bo0-mzLQHrOr35wQYm61gNi5ciJB06Zx4wTiAK-54po9J24cmwRkh_QbiNDik48q5rRYH2rpsXZmjycS2RhRInfnkv4pVlb-QGqU76aLCMU1-snMXKfg59MAYwRKqdS5k)
+
+## Эксперименты с несколькими наборами данных 
+| Amazon-book | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|RandomInductiveRecommender| 0.0000| 0.0005| 0.0000 |0.0007|
+|TopPopularInductiveRecommender| 0.0090| 0.0174 |0.0118| 0.0202|
+|UserKNNRecommender| 0.0067| 0.0012| 0.0088| 0.0124|
+|ALSRecommender| 0.0329| 0.0539| 0.0377| 0.0653|
+|MultVAE| 0.0358| 0.0579| 0.0419| 0.0706|
+
+| Gowalla | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|RandomInductiveRecommender| 0.0003 |0.0008| 0.0004 |0.0013|
+|TopPopularInductiveRecommender| 0.0398| 0.0493| 0.0406| 0.0553|
+|UserKNNRecommender| 0.0271| 0.0319| 0.0259| 0.0320|
+|ALSRecommender| 0.1017| 0.1444| 0.1189| 0.1727|
+|VAEInductiveRecommender| 0.1048| 0.1463 |0.1197|0.1839|
+
+| YELP | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|RandomInductiveRecommender| 0.0004 |0.0010 |0.0007| 0.0013|
+|TopPopularInductiveRecommender| 0.0192| 0.0368 |0.0259 |0.0472|
+|UserKNNRecommender| 0.0125| 0.0251| 0.0176 |0.0324|
+|ALSRecommender |0.0459 |0.0796 |0.0555| 0.0999|
+|MultVAE| 0.0472| 0.0818| 0.0570| 0.1003|
 
 ## Метод K ближайших соседей
 
@@ -252,20 +280,49 @@ yule: alpha: 22, factors: 57
 | ALSRecommender + KNN annoy: hamming |  0.22 | 0.27 |  0.21 |  0.27 |
 | ALSRecommender + KNN annoy: dot |  0.04 | 0.10 |  0.05 |  0.09 |
 
+# Подбор числа ближайших соседей
 
-## Подбор K_neighbors
+Лучшие результаты ALSRecommender + KNN: angular
 
-ALSRecommender + KNN annoy: angular
-
-![alt text](https://psv4.userapi.com/c237131/u169642165/docs/d31/39c574eb5bf0/KNN_r50.png?extra=BJ_2yZcl55m3esmj7T9mg9PzUM6hIPzwkPbSTUQn11mog04EwbkmNucRxHnoRRNvLA5sch9GjygKfSZNEDz4uyu6ULiTAKdYNK5_yrLsmKGdWo7YJGf-z9Oyfrp3UZey8gYOitc-60STOdU_3OP6cJSNMA)
-
-![alt text](https://psv4.userapi.com/c237131/u169642165/docs/d16/c8fb690c38b3/KNN_r20.png?extra=oDF0LKYVJbJRm4a5Yg5g7W5uoyqwzV8tP8bpTqJ3aZPdqI1GLEbNuJNjVWyoEMkVDvPybX2oTUqD7RRSkrs52KFv1wQgpMIINI_kcKdY9hT4IR8vX625cC6Z_kPjS1Akpfhd5mJ18tMg5xtDnXPjWV9Hmg)
-
-![alt text](https://psv4.userapi.com/c237131/u169642165/docs/d5/cf734589eadb/KNN_n20.png?extra=x9XljNDkxEr9635sSKmjAE6jO9Ils2oARi33XFB_T0atjLY7fHkE-AO3JEIGpOL_pVas40gSr_HagLyrCGH4u9euatcKZYZ0eddL3year-rNnCTOYFoRIFS4MfJPj6S26LGBwg35JEoWffmo4ORywjQ9pA)
-
-![alt text](https://psv4.userapi.com/c237131/u169642165/docs/d14/be2240c98f82/KNN_n100.png?extra=qEC5pSRwi1XOy6V86rylZ1E0bsDeCTUbHKXbXl2nEilVE9tM2nNpmsVsbHO3suzJjQW8mOwZlpvvaHhdx3n-41SEhljoFdUOw75plxYPFvlNPcT2oo79S5csFtjBJihwU6L-q6VOjdndDRgFcAawZvkseQ)
-
-
-| | ndcg_20| ndcg_100| recall_20| recall_50 |
+| MovieLens dataset | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
-| Лучший результат ALSRecommender + KNN annoy: angular |  **0.35** |  **0.41** | **0.34** | **0.42** |
+| Лучший результат ALSRecommender + KNN annoy |  **0.349** |  **0.411** | **0.344** | **0.420** |
+
+| Amazon-book dataset | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+| Лучший результат ALSRecommender + KNN annoy |  **0.041** |  **0.067** | **0.045** | **0.073** |
+
+| Gowalla dataset | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+| Лучший результат ALSRecommender + KNN annoy |  **0.116** |  **0.160** | **0.128** | **0.190** |
+
+| YELP dataset | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+| Лучший результат ALSRecommender + KNN annoy |  **0.057** |  **0.091** | **0.070** | **0.115** |
+
+# Взвешивание скоров слижайших соседей
+
+|  | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
+|Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
+|Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
+|YELP dataset| 0.053| 0.092 |0.065 |0.115|
+
+# Блендинг по ближайшим соседям 
+
+|  | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
+|Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
+|Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
+|YELP dataset| 0.053| 0.092 |0.065 |0.115|
+
+# Градиентный бустинг
+
+|  | ndcg_20| ndcg_100| recall_20| recall_50 |
+|---| ---| ---| ---| --- |
+|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
+|Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
+|Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
+|YELP dataset| 0.053| 0.092 |0.065 |0.115|
