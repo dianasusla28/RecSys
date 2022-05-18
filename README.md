@@ -304,7 +304,7 @@ yule: alpha: 22, factors: 57
 
 |  | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
-|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
+|MovieLens dataset |0.349 |	0.409 |	0.342 |	0.416|
 |Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
 |Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
 |YELP dataset| 0.053| 0.092 |0.065 |0.115|
@@ -313,16 +313,16 @@ yule: alpha: 22, factors: 57
 
 |  | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
-|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
-|Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
-|Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
-|YELP dataset| 0.053| 0.092 |0.065 |0.115|
+|MovieLens dataset |0.0612 |	0.1295 |	0.0735 |	0.1402|
+|Amazon-book dataset| 0.0199 |   0.0411 |   0.0249 |   0.0511|
+|Gowalla dataset| 0.0522 |	0.1007 |	0.0742 |	0.1417|
+|YELP dataset|  0.0226 |  0.0590 |   0.0320 |   0.0759|
 
 # Градиентный бустинг
 
 |  | ndcg_20| ndcg_100| recall_20| recall_50 |
 |---| ---| ---| ---| --- |
-|MovieLens dataset |0.347 |0.409| 0.342 |0.416|
-|Amazon-book dataset| 0.041| 0.063| 0.045| 0.074|
-|Gowalla dataset| 0.113| 0.149 |0.124 |0.175|
-|YELP dataset| 0.053| 0.092 |0.065 |0.115|
+|MovieLens dataset |0.365 |0.423 |	0.364 |0.4356|
+|Amazon-book dataset| 0.041 |	0.063 |	0.045 |	0.074 |
+|Gowalla dataset| 0.109 |	0.153 |	0.121 |	0.181|
+|YELP dataset| 0.046 |	0.084 |	0.061 |	0.110|
